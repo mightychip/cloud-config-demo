@@ -1,1 +1,12 @@
+server:
+  port: 8888
 
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/mightychip/cloud-config-properties.git
+          refresh-rate: 15
+          # poorly documented, but this allows us to break up configurations into organizations, achieving multi-tenancy
+          search-paths: '{application}'
