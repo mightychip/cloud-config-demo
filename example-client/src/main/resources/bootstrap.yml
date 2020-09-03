@@ -5,10 +5,17 @@ spring:
   cloud:
     config:
       # this property in combination with spring-retry and spring-boot-starter-aop existing on the classpath enable
-      # a retry mechanism with incremental backoff
+      # a retry mechanism with incremental backoff - pretty critical for our use of Docker Compose
       fail-fast: true
       # this is the branch in the Git repo when using a git backend
       label: master
+      # these configure the retry mechanics enabled above - NOTE: You MUST have spring-retry and spring-boot-starter-aop
+      # on your classpath for this to work.
+      retry:
+        initial-interval: 1500
+        max-attempts: 10
+        max-interval: 10000
+        multiplier: 1.5
 ---
 spring:
   profiles: dev, prod
@@ -23,7 +30,6 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-
 
 # Application profiles from Cloud Config are accessed with three parameters:
 # application - this can actually be broken up into organization(_)application with (_) being a special character to

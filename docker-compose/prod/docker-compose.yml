@@ -4,13 +4,14 @@ services:
   database:
     container_name: database
     image: docker.io/mightychip/cloud-config-demo-database:latest
-    user: exampleuser
     ports:
       - "5432:5432"
     networks:
       - example
 
   cloud-config-server:
+    depends_on:
+      - database
     container_name: cloud-config-server
     image: docker.io/mightychip/cloud-config-demo-server:latest
     ports:
@@ -20,9 +21,14 @@ services:
 
   example-client:
     container_name: cloud-config-client
+    depends_on:
+      - cloud-config-server
+      - database
     image: docker.io/mightychip/cloud-config-demo-client:latest
     ports:
       - "8085:8085"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
     networks:
       - example
 

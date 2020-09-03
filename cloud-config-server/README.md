@@ -1,6 +1,6 @@
 #Cloud Config Server
 This is a simple Cloud Config server used for the purposes of a demo of Spring Cloud Config's capabilities.
 
-This application includes dev/stage profiles stored in an external git repository (https://github.com/mightychip/cloud-config-properties.git) and production profiles stored in a Dockerized MySQL database.  Pattern matching is used to map profiles to the appropriate backend (ie. Git for `dev`/`stage` and JDBC for `prod`).
+Previous plans were to utilize composite repositories to supply some profile properties from a JDBC database and others from Git.  Surprisingly, this mix seems not to work as advertised, and documentation around the subject is non-existent. This branch focuses on the bare bones, so we'll leave that for another day.
 
-Rather than utilize Spotify's Docker plugin for Maven, we'll lean on Spring Boot's `spring-boot:build-image` Maven goal.  This ensures we build a proper layered image, which results in easier updates and more efficient downloads when new versions get released.  This is why there is a conspicuous absence of a Dockerfile in this module.
+Spring Boot's `spring-boot:build-image` Maven goal could be used to "Dockerize" this application, however, it's nice to practice manually layering a docker image.  That's what's going on within the `Dockerfile`, which has been further documented there.  Spotify's Docker plugin provides a little more control over the end container.  The disadvantage here is that we need to keep on top of changes with Spring Boot, should ordering or naming of layers change over time, we'll need to update the `Dockerfile` accordingly.  Using `spring-boot:build-image` would effectively sidestep these concerns.

@@ -6,4 +6,4 @@ ADD docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
 
 ENV POSTGRES_USER exampleuser
 ENV POSTGRES_PASSWORD changeme
-ENV POSTGRES_DB example_client
+ENV POSTGRES_DB cloud_config_demo
