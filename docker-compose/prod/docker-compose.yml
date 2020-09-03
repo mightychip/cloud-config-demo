@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: database
+    image: docker.io/mightychip/cloud-config-demo-database:latest
+    user: exampleuser
+    ports:
+      - "5432:5432"
+    networks:
+      - example
+
+  cloud-config-server:
+    container_name: cloud-config-server
+    image: docker.io/mightychip/cloud-config-demo-server:latest
+    ports:
+      - "8888:8888"
+    networks:
+      - example
+
+  example-client:
+    container_name: cloud-config-client
+    image: docker.io/mightychip/cloud-config-demo-client:latest
+    ports:
+      - "8085:8085"
+    networks:
+      - example
+
+networks:
+  example:

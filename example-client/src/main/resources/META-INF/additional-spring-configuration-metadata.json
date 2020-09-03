@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "example-client.message",
+      "type": "java.lang.String",
+      "description": "A simple message the client delivers in classic 'Hello, World!' fashion."
+  }
+] }

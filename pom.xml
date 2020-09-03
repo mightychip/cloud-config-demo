@@ -9,8 +9,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <docker.image.prefix>docker.io/mightychip</docker.image.prefix>
+    </properties>
+
     <modules>
         <module>cloud-config-server</module>
         <module>example-client</module>
+        <module>database</module>
     </modules>
 </project>

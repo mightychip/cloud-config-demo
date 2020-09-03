@@ -1,0 +1,33 @@
+# default profile... anything here is the same regardless of profile.
+spring:
+  application:
+    name: examples(_)example_client
+  cloud:
+    config:
+      # this property in combination with spring-retry and spring-boot-starter-aop existing on the classpath enable
+      # a retry mechanism with incremental backoff
+      fail-fast: true
+      # this is the branch in the Git repo when using a git backend
+      label: master
+---
+spring:
+  profiles: dev, prod
+  cloud:
+    config:
+      # Since we need to specify the properties source before the application fully starts, this URI needs to live in the
+      # bootstrap configuration instead of the application configuration... which we are effectively replacing.
+      uri: http://cloud-config-server:8888
+---
+spring:
+  profiles: local
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+
+# Application profiles from Cloud Config are accessed with three parameters:
+# application - this can actually be broken up into organization(_)application with (_) being a special character to
+#               denote subdirectories in Git backends - NOTE: dashes are not allowed in application names for Spring
+#               Cloud Config - set by spring.application.name
+# profile - this is pretty self explanatory - set by spring.profiles.active
+# label - for a Git backend, this is used to select a branch - set by spring.cloud.config.label

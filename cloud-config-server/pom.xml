@@ -9,12 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ca.purpleowl.examples.spring.cloud</groupId>
+	<!-- NOTE: cloud-config-demo-server on DockerHub -->
 	<artifactId>cloud-config-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cloud-config-server</name>
 	<description>Spring Cloud Config Server demo, detailing some more advanced configuration options.</description>
 
 	<properties>
+		<docker.image.prefix>docker.io/mightychip</docker.image.prefix>
 		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR7</spring-cloud.version>
 	</properties>
@@ -75,6 +77,57 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- Create a layered jar so we can properly and responsibly load our Docker image. -->
+				<configuration>
+					<layers>
+						<enabled>true</enabled>
+					</layers>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.2</version>
+				<executions>
+					<execution>
+						<id>tag-latest</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>tag</goal>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<tag>latest</tag>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tag-version</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>tag</goal>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<tag>${project.version}</tag>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>${docker.image.prefix}/cloud-config-demo-server</repository>
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+				<!-- needed since ~JDK9 to avoid a build error via this plugin -->
+				<dependencies>
+					<dependency>
+						<groupId>javax.activation</groupId>
+						<artifactId>activation</artifactId>
+						<version>1.1.1</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

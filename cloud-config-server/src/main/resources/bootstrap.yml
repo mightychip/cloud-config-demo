@@ -1,0 +1,4 @@
+# ultimately you'd use a keystore, but this will work for now... this must be done at the bare minimum for encryption
+# to work
+encrypt:
+  key: 'encryption key goes here'

@@ -9,4 +9,13 @@ spring:
           uri: https://github.com/mightychip/cloud-config-properties.git
           refresh-rate: 15
           # poorly documented, but this allows us to break up configurations into organizations, achieving multi-tenancy
+          # for further details, see how we set spring.application.name in example-client
           search-paths: '{application}'
+  datasource:
+    url: jdbc:h2:mem
+#---
+#spring:
+#  cloud:
+#    config:
+#      server:
+#  profiles: prod
