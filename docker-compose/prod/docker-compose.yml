@@ -27,6 +27,7 @@ services:
     image: docker.io/mightychip/cloud-config-demo-client:latest
     ports:
       - "8085:8085"
+      - "8086:8086"
     environment:
       - "SPRING_PROFILES_ACTIVE=prod"
     networks:
