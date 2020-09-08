@@ -3,7 +3,7 @@ version: "3.8"
 services:
   cloud-config-server:
     container_name: cloud-config-server
-    image: docker.io/mightychip/cloud-config-demo-server:latest
+    image: localhost:5000/cloud-config-demo-server:latest
     ports:
       - "8888:8888"
     networks:
@@ -13,9 +13,10 @@ services:
     container_name: cloud-config-client
     depends_on:
       - cloud-config-server
-    image: docker.io/mightychip/cloud-config-demo-client:latest
+    image: localhost:5000/cloud-config-demo-client:latest
     ports:
       - "8085:8085"
+      - "8086:8086"
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
     networks:

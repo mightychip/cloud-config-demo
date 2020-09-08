@@ -1,0 +1,35 @@
+### Message that doesn't get updated when application refresh is called.
+
+GET http://localhost:8085/message
+
+### View a message which has values updated when application refresh is called.
+
+GET http://localhost:8085/pronoun-check
+
+### Quick peek at the JPA REST Repositories
+
+GET http://localhost:8085/example-api
+
+### Create a Guest Book entry
+
+POST http://localhost:8085/example-api/guest-book
+Content-Type: application/json
+
+{
+  "title": "test title",
+  "message": "test message",
+  "guest": "Louis Armstrong",
+  "date": "2020-01-01"
+}
+
+### Get a quick listing of the Guest Book entries
+
+GET http://localhost:8085/example-api/guest-book
+
+### Check the application health
+
+GET http://localhost:8086/actuator/health
+
+### Retrieve an updated Application Context from the Cloud Config Server
+
+POST http://localhost:8086/actuator/refresh

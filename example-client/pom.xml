@@ -15,17 +15,20 @@
 	<description>Demo client for Spring Cloud Config</description>
 
 	<properties>
-		<docker.image.prefix>docker.io/mightychip</docker.image.prefix>
+		<docker.image.prefix>localhost:5000</docker.image.prefix>
 		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR7</spring-cloud.version>
 	</properties>
 
 	<dependencies>
+		<!-- This provides an endpoint that will allow us to refresh our application context.  That's useful if
+			properties get updated or something!  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<!-- For our web services -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -43,19 +46,22 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-
+		<!-- base dependency for Spring Cloud stuff -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter</artifactId>
 		</dependency>
 
+		<!-- dependency for Spring Cloud Config -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<!-- The following two dependencies are required for the Cloud Config retry mechanism -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 		<dependency>
@@ -63,6 +69,7 @@
 			<artifactId>spring-retry</artifactId>
 		</dependency>
 
+		<!-- useful for seeing what's going on under the hood -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -70,6 +77,7 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- the next two dependencies are required for the DB layer -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -80,12 +88,14 @@
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 
+		<!-- DB Driver for "prod" profile -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- DB Driver for "dev" profile -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -138,6 +148,8 @@
 	</build>
 
 	<profiles>
+		<!-- Creation of the Docker Image is enabled with a profile... if you're building this locally, you'll need to
+			change the repository name appropriately -->
 		<profile>
 			<id>build-and-push-docker-image</id>
 			<build>
@@ -173,7 +185,7 @@
 							</execution>
 						</executions>
 						<configuration>
-							<repository>docker.io/mightychip/cloud-config-demo-client</repository>
+							<repository>${docker.image.prefix}/cloud-config-demo-client</repository>
 							<buildArgs>
 								<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 							</buildArgs>
