@@ -15,7 +15,7 @@
 	<description>Demo client for Spring Cloud Config</description>
 
 	<properties>
-		<docker.image.prefix>docker.io/mightychip</docker.image.prefix>
+		<docker.image.prefix>localhost:5000</docker.image.prefix>
 		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR7</spring-cloud.version>
 	</properties>
@@ -185,7 +185,7 @@
 							</execution>
 						</executions>
 						<configuration>
-							<repository>docker.io/mightychip/cloud-config-demo-client</repository>
+							<repository>${docker.image.prefix}/cloud-config-demo-client</repository>
 							<buildArgs>
 								<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 							</buildArgs>

@@ -16,7 +16,7 @@
 	<description>Spring Cloud Config Server demo, detailing some more advanced configuration options.</description>
 
 	<properties>
-		<docker.image.prefix>docker.io/mightychip</docker.image.prefix>
+		<docker.image.prefix>localhost:5000</docker.image.prefix>
 		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR7</spring-cloud.version>
 	</properties>
