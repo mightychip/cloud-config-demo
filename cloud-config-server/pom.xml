@@ -11,7 +11,7 @@
 	<groupId>ca.purpleowl.examples.spring.cloud</groupId>
 	<!-- NOTE: cloud-config-demo-server on DockerHub -->
 	<artifactId>cloud-config-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>cloud-config-server</name>
 	<description>Spring Cloud Config Server demo, detailing some more advanced configuration options.</description>
 
@@ -32,6 +32,16 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-monitor</artifactId>
 		</dependency>
 
 		<dependency>

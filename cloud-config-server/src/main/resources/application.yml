@@ -1,7 +1,3 @@
-management:
-  server:
-    port: 8889
-
 server:
   port: 8888
 
@@ -10,8 +6,13 @@ spring:
     config:
       server:
         git:
-          refresh-rate: 15
+#          refresh-rate: 15
           # poorly documented, but this allows us to break up configurations into organizations, achieving multi-tenancy
           # for further details, see how we set spring.application.name in example-client
           search-paths: '{application}'
           uri: https://github.com/mightychip/cloud-config-properties.git
+  rabbitmq:
+    host: rabbit
+    username: exampleuser
+    password: changeme
+    port: 5672

@@ -8,7 +8,7 @@ spring:
       # a retry mechanism with incremental backoff - pretty critical for our use of Docker Compose
       fail-fast: true
       # this is the branch in the Git repo when using a git backend
-      label: cloud-config-post-1
+      label: cloud-config-post-2
       # these configure the retry mechanics enabled above - NOTE: You MUST have spring-retry and spring-boot-starter-aop
       # on your classpath for this to work.
       retry:

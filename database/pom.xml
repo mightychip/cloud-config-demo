@@ -6,7 +6,7 @@
     <parent>
         <artifactId>cloud-config-demo</artifactId>
         <groupId>ca.purpleowl.examples.spring.cloud</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
     <artifactId>cloud-config-demo-database</artifactId>
     <packaging>pom</packaging>

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ca.purpleowl.examples.spring.cloud</groupId>
 	<artifactId>example-client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>example-client</name>
 	<description>Demo client for Spring Cloud Config</description>
 
@@ -75,6 +75,11 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
 		</dependency>
 
 		<!-- the next two dependencies are required for the DB layer -->

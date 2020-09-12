@@ -11,7 +11,7 @@ services:
 
   cloud-config-server:
     depends_on:
-      - database
+      - rabbit
     container_name: cloud-config-server
     image: localhost:5000/cloud-config-demo-server:latest
     ports:
@@ -24,6 +24,7 @@ services:
     depends_on:
       - cloud-config-server
       - database
+      - rabbit
     image: localhost:5000/cloud-config-demo-client:latest
     ports:
       - "8085:8085"
@@ -32,6 +33,18 @@ services:
       - "SPRING_PROFILES_ACTIVE=prod"
     networks:
       - example
+
+  rabbit:
+    container_name: rabbit
+    image: library/rabbitmq:3-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - example
+    environment:
+      - "RABBITMQ_DEFAULT_USER=exampleuser"
+      - "RABBITMQ_DEFAULT_pass=changeme"
 
 networks:
   example:
